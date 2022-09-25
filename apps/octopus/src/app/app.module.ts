@@ -1,21 +1,26 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TodoResolver } from './queries/todo/todo.resolver';
+import { DirectiveLocation, GraphQLDirective } from 'graphql';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
+    TodoModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      debug: false,
-      playground: true,
-      typePaths: ['./**/*.graphql']
-    })
+      // autoSchemaFile: 'schema.gql',
+      autoSchemaFile: true,
+      installSubscriptionHandlers: true,
+      buildSchemaOptions: {
+        directives: [
+          new GraphQLDirective({
+            name: 'upper',
+            locations: [DirectiveLocation.FIELD_DEFINITION],
+          }),
+        ],
+      },
+    }),
   ],
-  controllers: [AppController],
-  providers: [AppService, TodoResolver],
 })
 export class AppModule {}
