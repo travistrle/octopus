@@ -40,8 +40,9 @@ export class TodoService {
   ];
 
   async findAll(accessToken: string): Promise<Todo[]> {
+    console.log(`======> ${accessToken}`);
     const headers = {
-      'Authorization': `Bearer ${accessToken}`
+      'Authorization': `${accessToken}`
     };
     const todoData$ = this.httpService.get('http://localhost:9999/api/todos', {headers: headers}).pipe(
       map((axiosResponse: AxiosResponse) => {
