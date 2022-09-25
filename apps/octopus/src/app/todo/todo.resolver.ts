@@ -13,6 +13,6 @@ export class TodoResolver {
   @Query(returns => [Todo])
   todos(@Context() context: any): Promise<Todo[]> {
     const { req, res } = context
-    return this.todoService.findAll(req.headers['accesstoken']);
+    return this.todoService.findAll(req.headers['authorization']);
   }
 }
