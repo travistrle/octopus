@@ -1,0 +1,8 @@
+type Todo {
+  id: Int!
+  task: String
+}
+
+type Query {
+  todos: [Todo]
+}
