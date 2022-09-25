@@ -1,13 +1,9 @@
 import { Query, Resolver } from '@nestjs/graphql';
-
-export interface TodoEntity {
-  id: number;
-  task: string;
-}
+import { Todo } from './todo.interface';
 
 @Resolver('Todo')
 export class TodoResolver {
-  private todos: TodoEntity[] = [
+  private todos: Todo[] = [
     {
       id: 1,
       task: 'Voltron',
@@ -15,11 +11,15 @@ export class TodoResolver {
     {
       id: 2,
       task: 'Ship in a Bottle',
+    },
+    {
+      id: 3,
+      task: 'Hello 3',
     }
   ];
 
   @Query('todos')
-  getTodos(): TodoEntity[] {
+  getTodos(): Todo[] {
     return this.todos;
   }
 }
