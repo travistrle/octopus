@@ -4,7 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TodoResolver } from './todo.resolver';
+import { TodoResolver } from './queries/todo/todo.resolver';
 
 @Module({
   imports: [
